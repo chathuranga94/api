@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27018/final');
+mongoose.connect('mongodb://104.236.206.83:27018/final');
 
 mongoose.set('debug', true);
 
