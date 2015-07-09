@@ -6,8 +6,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://104.236.206.83:27018/final');
-mongoose.connect('mongodb://admin:aqua@ds051738.mongolab.com:51738/aqua');
+mongoose.connect('mongodb://104.236.206.83:27018/final');
+//mongoose.connect('mongodb://admin:aqua@ds051738.mongolab.com:51738/aqua');
     
 
 mongoose.set('debug', true);
@@ -50,6 +50,7 @@ app.post('/adduser', function (req, res) {
 app.post('/transaction', function (req, res) {
   var due;
   var bal;
+  var pay;
   var id;
   
   console.log(req.body.id);
@@ -58,6 +59,7 @@ app.post('/transaction', function (req, res) {
       id =  req.body.id; 
       due = user.DueDate;
       due.setDate(due.getDate() + 30);
+      pay = req.body.amount ;
       bal = user.Balance;
       bal = bal - req.body.amount;
       update();
@@ -76,7 +78,7 @@ app.post('/transaction', function (req, res) {
       },
       $push: {
           'Trans': {
-                amount:200,
+                amount:pay,
                 date: now 
                    }
             }
